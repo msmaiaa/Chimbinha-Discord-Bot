@@ -1,3 +1,4 @@
 module.exports = {
-    Ping: require('./ping/ping.js')
+    ping: require('./ping.js'),
+    rastreio: require('./rastreio.js')
 };
