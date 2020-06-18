@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/msmaiaa/discord-bot-v2#readme",
   "dependencies": {
+    "ascii-table": "0.0.9",
     "discord.js": "^12.2.0"
   }
 }
