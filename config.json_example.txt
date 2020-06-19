@@ -1,0 +1,6 @@
+{
+    "token":"discordTokenHere",
+    "prefix" : "!",
+    "weatherapi" : "weatherApiKeyHere",
+    "channelFetchId": "id do canal"
+}
