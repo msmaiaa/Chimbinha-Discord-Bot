@@ -33,7 +33,14 @@ module.exports = {
         message = info.message;
         arg = args[0]
         if(arg == null){
-          message.channel.send("Insira alguma encomenda!")
+          message.delete();
+          message.reply("Insira alguma encomenda! mensagem sendo deletada em 5 segundos")
+          .then(async (msg)=>{
+            setTimeout(()=>{
+              console.log(msg);
+              msg.delete();
+            },5000)
+          })
           return;
         }
         rastreio = arg;
@@ -45,35 +52,47 @@ module.exports = {
         console.log(args); 
     },
     //exportar pra deixar rodando no setInterval
-    editarMsg(client){
-      console.log("editando mensagens")
-      client.channels.fetch(channelId)
-      .then((ch)=>{
-        channel = ch;
-        const messageManager = channel.messages
-        messageManager.fetch({limit: 10}).then((messages)=>{
-          var msgs = [];
-          messages.forEach((value, index)=>{
-              if(value.author.username == "Pepe" && value.embeds[0] != null){
-                if(value.embeds[0].fields[0].name === "Status:" ){
-                  msgs.push(value)
-                }
-              }
+    editarMsg(client, con){
+      console.log("checando os canais");
+      let channels;
+      con.query(`SELECT * FROM channels`,(err,rows)=>{
+        qtd = 0;
+        channels = rows;
+        channels.forEach((value)=>{
+          console.log("checando o canal " + value.id);
+          client.channels.fetch(value.id)
+          .then((ch)=>{
+            channel = ch;
+            const messageManager = channel.messages
+            messageManager.fetch({limit: 100}).then((messages)=>{
+              var msgs = [];
+              messages.forEach((value, index)=>{
+                  if(value.author.id == "554173287408861194" && value.embeds[0] != null){
+                    if(value.embeds[0].fields[0].name === "Status:" ){
+                      qtd++;
+                      msgs.push(value)
+                    }
+                  }
+              })
+              msgs.forEach((value, index)=>{
+                setTimeout(()=>{
+                    rastreio = value.embeds[0].title;
+                    if(value.embeds[0].fields[0].value == "Status: Objeto entregue ao destinatário"){
+                      value.delete();
+                    }
+                    msg = rastrear(rastreio)
+                    msg.then((res)=>{
+                      console.log("editando uma mensagem")
+                      value.edit(res);
+                    })
+                }, index * 7000)
+              })
+            })
           })
-          msgs.forEach((value, index)=>{
-            setTimeout(()=>{
-                rastreio = value.embeds[0].title;
-                if(value.embeds[0].fields[0].value == "Status: Objeto entregue ao destinatário"){
-                  value.delete();
-                }
-                msg = rastrear(rastreio)
-                msg.then((res)=>{
-                   value.edit(res);
-                })
-            }, index * 7000)
-          })
+        .catch(console.error);
         })
       })
-    .catch(console.error);
+      
+
   }
 }

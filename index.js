@@ -14,8 +14,8 @@ client.on('ready', ()=>{
     console.log(`${client.user.username} está online`);
     client.user.setActivity("a pica nelas");
     setInterval(()=>{
-        client.commands.get("rastreio").editarMsg(client)
-    },900000);
+        client.commands.get("rastreio").editarMsg(client,con)
+    },1800000);
 })
 
 function generateXp(){
@@ -23,10 +23,10 @@ function generateXp(){
 }
 
 var con = mysql.createConnection({
-    host: "35.237.200.154",
-    user: "pepe",
-    password: "70276120",
-    database: "sadb"
+    host: config.host,
+    user: config.user,
+    password: config.password,
+    database: config.database
 })
 
 con.connect(err =>{

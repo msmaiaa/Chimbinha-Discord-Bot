@@ -2,5 +2,9 @@
     "token":"discordTokenHere",
     "prefix" : "!",
     "weatherapi" : "weatherApiKeyHere",
-    "channelFetchId": "id do canal"
+    //mysql database
+    "host": "",
+    "user": "",
+    "password": "",
+    "database": ""
 }
