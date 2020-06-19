@@ -1,7 +1,8 @@
 const request = require("../node_modules/request-promise");
 const Discord = require("../node_modules/discord.js");
 const correiosurl="https://api.linketrack.com/track/json?user=teste&token=1abcd00b2731640e886fb41a8a9671ad1434c599dbaa0a0de9a5aa619f29a83f&codigo=";
-  
+const channelId = require("../config.json").channelFetchId;
+
 async function rastrear(arg){
     var resultado;
     await request(`${correiosurl}${arg}`,(error, response, body)=>{
@@ -52,7 +53,7 @@ module.exports = {
     //exportar pra deixar rodando no setInterval
     editarMsg(client){
       console.log("editando mensagens")
-      client.channels.fetch('722955893574074461')
+      client.channels.fetch(channelId)
       .then((ch)=>{
         channel = ch;
         const messageManager = channel.messages

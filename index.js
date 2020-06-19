@@ -13,7 +13,7 @@ client.on('ready', ()=>{
     client.user.setActivity("a pica nelas");
     setInterval(()=>{
         client.commands.get("rastreio").editarMsg(client)
-    },20000);
+    },1800000);
 })
 
 client.on('message', async message =>{
