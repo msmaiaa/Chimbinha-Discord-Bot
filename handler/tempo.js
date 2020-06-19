@@ -26,7 +26,7 @@ async function medirTempo(info, args){
 
       }
       else if(error){
-        console.error(erro);
+        console.error(error);
       }
     })
 }
