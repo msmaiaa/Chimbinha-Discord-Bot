@@ -3,7 +3,6 @@ const config = require("./config.json");
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const botCommands = require("./handler");
-const editarMsg = require("./handler/rastreio");
 
 Object.keys(botCommands).map(key => {
     client.commands.set(botCommands[key].name, botCommands[key]);
@@ -14,7 +13,7 @@ client.on('ready', ()=>{
     client.user.setActivity("a pica nelas");
     setInterval(()=>{
         client.commands.get("rastreio").editarMsg(client)
-    },30000);
+    },20000);
 })
 
 client.on('message', async message =>{

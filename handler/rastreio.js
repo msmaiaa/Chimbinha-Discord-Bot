@@ -44,22 +44,25 @@ module.exports = {
         rastreio = arg;
         msg = rastrear(rastreio)
         msg.then((res)=>{
-          //console.log(res)
+
           message.channel.send(res)
         })
         console.log(args); 
     },
+    //exportar pra deixar rodando no setInterval
     editarMsg(client){
       console.log("editando mensagens")
       client.channels.fetch('722955893574074461')
       .then((ch)=>{
         channel = ch;
         const messageManager = channel.messages
-        messageManager.fetch({limit: 30}).then((messages)=>{
+        messageManager.fetch({limit: 10}).then((messages)=>{
           var msgs = [];
           messages.forEach((value, index)=>{
-              if(value.author.username == "Pepe"){
-                msgs.push(value)
+              if(value.author.username == "Pepe" && value.embeds[0] != null){
+                if(value.embeds[0].fields[0].name === "Status:" ){
+                  msgs.push(value)
+                }
               }
           })
           msgs.forEach((value, index)=>{
