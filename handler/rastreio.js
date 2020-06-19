@@ -1,34 +1,28 @@
-const request = require("../node_modules/request-promise");
 const Discord = require("../node_modules/discord.js");
-const correiosurl="https://api.linketrack.com/track/json?user=teste&token=1abcd00b2731640e886fb41a8a9671ad1434c599dbaa0a0de9a5aa619f29a83f&codigo=";
+const { RastreioBrasil } = require("../node_modules/correios-brasil");
+
 const channelId = require("../config.json").channelFetchId;
 
 async function rastrear(arg){
     var resultado;
-    await request(`${correiosurl}${arg}`,(error, response, body)=>{
-    if(!error && response.statusCode == 200){
 
-    var parsedData = JSON.parse(body);
-    local = parsedData.eventos[0].local
-    data = parsedData.eventos[0].data
-    hora = parsedData.eventos[0].hora
+    correios = new RastreioBrasil();
+    rastreios = [arg]
+    await correios.rastrearEncomendas(rastreios)
+    .then((response)=>{
+      resultado = response[0].pop();
+      local = resultado.local;
+      data = resultado.data;
+      status = resultado.status;
 
-    var status;
-    if(parsedData.eventos[0].subStatus[0] == null){
-        status = parsedData.eventos[0].status;
-    }else{
-        status = parsedData.eventos[0].subStatus;
-    }
-    const exampleEmbed = new Discord.MessageEmbed()
-    .setTitle(`${rastreio}`)
-    .addField("Status: ", status)
-    .addField("Local: ", local)
-    .addField("Data: ", data)
-    .addField("Hora: ", hora)
-    resultado = exampleEmbed; 
-    }
-})
-return resultado;
+      const exampleEmbed = new Discord.MessageEmbed()
+      .setTitle(`${arg}`)
+      .addField("Status: ", status)
+      .addField("Local: ", local)
+      .addField("Data e hora: ", data)
+      resultado = exampleEmbed; 
+    })
+    return resultado;
 }
 
 module.exports = {
@@ -69,6 +63,9 @@ module.exports = {
           msgs.forEach((value, index)=>{
             setTimeout(()=>{
                 rastreio = value.embeds[0].title;
+                if(value.embeds[0].fields[0].value == "Status: Objeto entregue ao destinatário"){
+                  value.delete();
+                }
                 msg = rastrear(rastreio)
                 msg.then((res)=>{
                    value.edit(res);
