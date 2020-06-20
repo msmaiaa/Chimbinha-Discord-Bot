@@ -55,11 +55,10 @@ module.exports = {
       console.log("checando os canais");
       let channels;
       con.query(`SELECT * FROM channels`,(err,rows)=>{
-        qtd = 0;
         channels = rows;
         channels.forEach((value)=>{
-          console.log("checando o canal " + value.id);
-          client.channels.fetch(value.id)
+        console.log("checando o canal " + value.id);
+        client.channels.fetch(value.id)
           .then((ch)=>{
             channel = ch;
             const messageManager = channel.messages
@@ -68,7 +67,6 @@ module.exports = {
               messages.forEach((value, index)=>{
                   if(value.author.id == "554173287408861194" && value.embeds[0] != null){
                     if(value.embeds[0].fields[0].name === "Status:" ){
-                      qtd++;
                       msgs.push(value)
                     }
                   }
@@ -91,7 +89,5 @@ module.exports = {
         .catch(console.error);
         })
       })
-      
-
   }
 }

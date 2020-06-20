@@ -3,5 +3,6 @@ module.exports = {
     rastreio: require('./rastreio.js'),
     tempo: require("./tempo.js"),
     xp: require("./xp.js"),
-    watch: require("./watch.js")
+    watch: require("./watch.js"),
+    info: require("./info.js")
 };
