@@ -82,7 +82,7 @@ module.exports = {
                       console.log("editando uma mensagem")
                       value.edit(res);
                     })
-                }, index * 7000)
+                }, index * 2000)
               })
             })
           })
