@@ -64,9 +64,9 @@ module.exports = {
             const messageManager = channel.messages
             messageManager.fetch({limit: 100}).then((messages)=>{
               var msgs = [];
-              messages.forEach((value, index)=>{
+              messages.forEach((value)=>{
                   if(value.author.id == "554173287408861194" && value.embeds[0] != null){
-                    if(value.embeds[0].fields[0].name === "Status:" ){
+                    if(value.embeds[0].fields[0].name === "Status:"){
                       msgs.push(value)
                     }
                   }

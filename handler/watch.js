@@ -14,7 +14,6 @@ module.exports = {
                 message.reply("Este canal já está sendo observado para rastreio de encomendas!")
                 .then(async (msg)=>{
                   setTimeout(()=>{
-                    console.log(msg);
                     msg.delete();
                   },5000)
                 })
