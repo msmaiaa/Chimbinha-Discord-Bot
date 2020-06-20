@@ -86,7 +86,12 @@ module.exports = {
               })
             })
           })
-        .catch(console.error);
+        .catch((error)=>{
+          if(error.code == 10003){
+            con.query(`DELETE FROM channels WHERE id = '${value.id}'`);
+            console.log(`Canal ${value.id} não encontrado, deletando da database.`)
+          }
+        });
         })
       })
   }

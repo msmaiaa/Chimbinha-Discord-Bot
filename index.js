@@ -15,7 +15,7 @@ client.on('ready', ()=>{
     client.user.setActivity("a pica nelas");
     setInterval(()=>{
         client.commands.get("rastreio").editarMsg(client,con)
-    },1800000);
+    },10000);
 })
 
 function generateXp(){
