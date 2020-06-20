@@ -1,0 +1,8 @@
+CREATE TABLE xp
+(
+id VARCHAR(30) NOT NULL,
+xp INT NOT NULL
+);
+CREATE TABLE channels(
+id VARCHAR(30) NOT NULL
+);

@@ -1,7 +1,7 @@
 const Discord = require("../node_modules/discord.js");
 const { RastreioBrasil } = require("../node_modules/correios-brasil");
 
-const channelId = require("../config.json").channelFetchId;
+
 
 async function rastrear(arg){
     var resultado;
@@ -46,7 +46,6 @@ module.exports = {
         rastreio = arg;
         msg = rastrear(rastreio)
         msg.then((res)=>{
-
           message.channel.send(res)
         })
         console.log(args); 
