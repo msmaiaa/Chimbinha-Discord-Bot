@@ -48,7 +48,6 @@ module.exports = {
         msg.then((res)=>{
           message.channel.send(res)
         })
-        console.log(args); 
     },
     //exportar pra deixar rodando no setInterval
     editarMsg(client, con){

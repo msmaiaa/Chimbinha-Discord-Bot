@@ -16,7 +16,7 @@ async function medirTempo(info, args){
           var temperatura = parsedData.main.temp + "ºC";
           var tempMax = parsedData.main.temp_max + "ºC";
           var tempMin = parsedData.main.temp_min + "ºC";
-          console.log(nome)
+
           const exampleEmbed = new Discord.MessageEmbed()
           .setTitle(`Tempo em: ${nome}`) 
           .addField('Temperatura Atual: ', temperatura)
